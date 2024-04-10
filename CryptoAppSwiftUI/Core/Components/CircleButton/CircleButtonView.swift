@@ -31,8 +31,8 @@ struct CircleButtonView_Previews: PreviewProvider {
                 .previewLayout(.sizeThatFits)
             // Preview'i full screen den button boyutuna getiriyor
             CircleButtonView(iconName: "plus")
-                .colorScheme(.dark)
                 .previewLayout(.sizeThatFits)
+                .preferredColorScheme(.dark)
             // Preview'i full screen den button boyutuna getiriyor
         }
     }
