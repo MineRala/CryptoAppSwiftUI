@@ -19,6 +19,7 @@
 		E81C57522BC6F5C50050BD2C /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C57512BC6F5C50050BD2C /* CoinRowView.swift */; };
 		E81C57562BC6F6050050BD2C /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C57552BC6F6050050BD2C /* PreviewProvider.swift */; };
 		E81C57582BC6FF2A0050BD2C /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C57572BC6FF2A0050BD2C /* Double.swift */; };
+		E81C575A2BC705DE0050BD2C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C57592BC705DE0050BD2C /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E81C57512BC6F5C50050BD2C /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
 		E81C57552BC6F6050050BD2C /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		E81C57572BC6FF2A0050BD2C /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		E81C57592BC705DE0050BD2C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 		E81C57422BC6DE970050BD2C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E81C57592BC705DE0050BD2C /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E81C57522BC6F5C50050BD2C /* CoinRowView.swift in Sources */,
+				E81C575A2BC705DE0050BD2C /* HomeViewModel.swift in Sources */,
 				E81C572F2BC6C5BE0050BD2C /* ContentView.swift in Sources */,
 				E81C574A2BC6DFB30050BD2C /* CircleButtonView.swift in Sources */,
 				E81C57442BC6DEA60050BD2C /* HomeView.swift in Sources */,
