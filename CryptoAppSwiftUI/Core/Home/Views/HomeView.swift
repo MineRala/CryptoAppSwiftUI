@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var vm: HomeViewModel
+//    @StateObject private var vm = HomeViewModel()
     @State private var showPortfolio = false
     
     var body: some View {

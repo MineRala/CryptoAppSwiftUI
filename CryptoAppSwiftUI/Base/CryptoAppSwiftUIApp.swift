@@ -17,7 +17,7 @@ struct CryptoAppSwiftUIApp: App {
                     .navigationBarBackButtonHidden(true)
             }
             .environmentObject(vm)
-            // View Model'i environment object yapamamızın sebebi HomeView ve homeView'in tüm child viewleri homeViewModel'e erişebilsin diye.
+   ///          View Model'i environment object yapamamızın sebebi HomeView ve homeView'in tüm child viewleri homeViewModel'e erişebilsin diye.
         }
     }
 }
