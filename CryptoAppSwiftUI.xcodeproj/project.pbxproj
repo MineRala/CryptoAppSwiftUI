@@ -28,6 +28,9 @@
 		E81C57692BCEDB300050BD2C /* LocaleFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C57682BCEDB300050BD2C /* LocaleFileManager.swift */; };
 		E81C576C2BCF9D010050BD2C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C576B2BCF9D010050BD2C /* SearchBarView.swift */; };
 		E81C576E2BCFAC660050BD2C /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C576D2BCFAC660050BD2C /* UIApplication.swift */; };
+		E81C57702BCFDF110050BD2C /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C576F2BCFDF110050BD2C /* StatisticModel.swift */; };
+		E81C57732BCFE0690050BD2C /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C57722BCFE0690050BD2C /* StatisticView.swift */; };
+		E81C57752BD00DF60050BD2C /* HomeStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C57742BD00DF60050BD2C /* HomeStatsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +56,9 @@
 		E81C57682BCEDB300050BD2C /* LocaleFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleFileManager.swift; sourceTree = "<group>"; };
 		E81C576B2BCF9D010050BD2C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		E81C576D2BCFAC660050BD2C /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		E81C576F2BCFDF110050BD2C /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
+		E81C57722BCFE0690050BD2C /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
+		E81C57742BD00DF60050BD2C /* HomeStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,7 @@
 			children = (
 				E81C57432BC6DEA60050BD2C /* HomeView.swift */,
 				E81C57512BC6F5C50050BD2C /* CoinRowView.swift */,
+				E81C57742BD00DF60050BD2C /* HomeStatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,6 +162,7 @@
 		E81C57452BC6DF7D0050BD2C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E81C57712BCFE05C0050BD2C /* Statistic */,
 				E81C576A2BCF9CF30050BD2C /* SearchBar */,
 				E81C57482BC6DFA50050BD2C /* CircleButton */,
 			);
@@ -174,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				E81C574E2BC6EFD10050BD2C /* CoinModel.swift */,
+				E81C576F2BCFDF110050BD2C /* StatisticModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +229,14 @@
 				E81C576B2BCF9D010050BD2C /* SearchBarView.swift */,
 			);
 			path = SearchBar;
+			sourceTree = "<group>";
+		};
+		E81C57712BCFE05C0050BD2C /* Statistic */ = {
+			isa = PBXGroup;
+			children = (
+				E81C57722BCFE0690050BD2C /* StatisticView.swift */,
+			);
+			path = Statistic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,12 +309,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81C57702BCFDF110050BD2C /* StatisticModel.swift in Sources */,
 				E81C575D2BC7124B0050BD2C /* CoinDataService.swift in Sources */,
 				E81C57522BC6F5C50050BD2C /* CoinRowView.swift in Sources */,
 				E81C575A2BC705DE0050BD2C /* HomeViewModel.swift in Sources */,
 				E81C572F2BC6C5BE0050BD2C /* ContentView.swift in Sources */,
 				E81C574A2BC6DFB30050BD2C /* CircleButtonView.swift in Sources */,
 				E81C57632BCE90830050BD2C /* CoinImageView.swift in Sources */,
+				E81C57732BCFE0690050BD2C /* StatisticView.swift in Sources */,
 				E81C57442BC6DEA60050BD2C /* HomeView.swift in Sources */,
 				E81C572D2BC6C5BE0050BD2C /* CryptoAppSwiftUIApp.swift in Sources */,
 				E81C576E2BCFAC660050BD2C /* UIApplication.swift in Sources */,
@@ -305,6 +324,7 @@
 				E81C57602BCE89AB0050BD2C /* NetworkingManager.swift in Sources */,
 				E81C576C2BCF9D010050BD2C /* SearchBarView.swift in Sources */,
 				E81C574C2BC6E67F0050BD2C /* CircleButtonAnimationView.swift in Sources */,
+				E81C57752BD00DF60050BD2C /* HomeStatsView.swift in Sources */,
 				E81C57672BCEA3130050BD2C /* CoinImageViewModel.swift in Sources */,
 				E81C57562BC6F6050050BD2C /* PreviewProvider.swift in Sources */,
 				E81C57582BC6FF2A0050BD2C /* Double.swift in Sources */,

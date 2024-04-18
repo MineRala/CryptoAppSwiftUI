@@ -7,48 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F8740AB6-3963-48B3-8BEE-4307B97DC064"
+            uuid = "FB676DD3-8DDE-438A-B472-562B332B18E4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CryptoAppSwiftUI/Core/Home/Views/CoinRowView.swift"
+            filePath = "CryptoAppSwiftUI/Extensions/Double.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
-            landmarkName = "CoinRowView"
-            landmarkType = "14">
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "asCurrencyWith2Decimals()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C08FB4D5-A2D4-4DC2-82DD-74BB8400EC22"
+            uuid = "F359A4BF-A7BB-4BEA-8165-5B96760D99B8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CryptoAppSwiftUI/Core/Home/Views/CoinRowView.swift"
+            filePath = "CryptoAppSwiftUI/Models/CoinModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0A64B0FE-21C3-4738-9F33-FA72C538ECC4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CryptoAppSwiftUI/Core/Home/Views/CoinRowView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "leftColumn"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "currentHoldingsValue"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
