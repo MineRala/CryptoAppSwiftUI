@@ -14,12 +14,16 @@ final class HomeViewModel: ObservableObject  {
     @Published var portfolioCoins: [CoinModel] = []
     @Published var searchText: String = ""
     @Published var isLoading: Bool = false
+    @Published var sortOption: SortOption = .holdings
     
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     private let portfolioDataService = PortfolioDataService()
     private var cancallables = Set<AnyCancellable>()
     
+    enum SortOption {
+        case rank, rankReversed, holdings, holdingsReversed, price, priceReversed
+    }
     
     init() {
         addSubscribers()
@@ -30,10 +34,10 @@ final class HomeViewModel: ObservableObject  {
         $searchText
         /// 2 publisher'ı birleştirmek için combine latest kullanılır. Son yayınlanan değeri alır.
         /// combineLatest operatörü, herhangi bir yayın değeri değiştiğinde çalışır. Bu nedenle, searchText yayını her değiştiğinde veya coinDataService.$allCoins yayını her değiştiğinde, combineLatest operatörü tetiklenir ve işlenir.
-            .combineLatest(coinDataService.$allCoins)
+            .combineLatest(coinDataService.$allCoins, $sortOption)
         /// yayınlanan değerler arasında bir gecikme (delay) ekler. Bu durumda, arama metni her değiştiğinde işlemin tetiklenmesini biraz geciktirir. Bu, kullanıcı arama metnini hızlıca değiştiriyorsa, her bir değişikliğin hemen işlenmesini önler ve yalnızca belirli bir süre boyunca değişiklik yapılmadığında işlemi gerçekleştirir. Bu, gereksiz iş yükünü azaltmak ve daha verimli bir kullanıcı deneyimi sağlamak için kullanılır.
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-            .map(filterCoins)
+            .map(filterAndSortCoins)
             .sink { [weak self] coins in
                 guard let self else { return }
                 self.allCoins = coins
@@ -46,7 +50,7 @@ final class HomeViewModel: ObservableObject  {
             .map(mapAllCoinsToPortfolioCoins)
             .sink { [weak self] coins in
                 guard let self else { return }
-                self.portfolioCoins = coins
+                self.portfolioCoins = self.sortPortfolioCoinsIfNeeded(coins: coins)
             }
             .store(in: &cancallables)
         
@@ -74,6 +78,12 @@ final class HomeViewModel: ObservableObject  {
         HapticManager.notification(type: .success)
     }
     
+    private func filterAndSortCoins(text: String, coins: [CoinModel], sort: SortOption) -> [CoinModel] {
+        var updatedCoins = filterCoins(text: text, coins: coins)
+        sortCoins(sort: sort, coins: &updatedCoins)
+        return updatedCoins
+    }
+    
     private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
         guard !text.isEmpty else {
             return coins
@@ -81,6 +91,32 @@ final class HomeViewModel: ObservableObject  {
         let lowercasedText = text.lowercased()
         return coins.filter { coin in
             return coin.name.lowercased().contains(lowercasedText) || coin.symbol.lowercased().contains(lowercasedText) || coin.id.lowercased().contains(lowercasedText)
+        }
+    }
+    /// coins parametresi inout olarak belirtilmiştir, bu da işlevin bu dizi üzerinde değişiklik yapabileceği anlamına gelir. Bu nedenle, işlev çağrıldığında coins parametresi üzerinde yapılan değişiklikler işlevin çağrıldığı yerde etkili olacaktır. Bu tür parametreler genellikle işlevin dışarıya değer döndürmesi yerine, doğrudan dizi üzerinde değişiklik yapması gerektiğinde kullanılır.
+    /// Coins dizesi üstünde değişiklik yapıldı. Returnlemeye gerek yok
+    private func sortCoins(sort: SortOption, coins: inout [CoinModel]) {
+        switch sortOption {
+        case .rank, .holdings:
+            coins.sort(by: { $0.rank < $1.rank })
+        case .rankReversed, .holdingsReversed:
+            coins.sort(by: { $0.rank > $1.rank })
+        case .price:
+            coins.sort(by: { $0.currentPrice > $1.currentPrice })
+        case .priceReversed:
+            coins.sort(by: { $0.currentPrice < $1.currentPrice })
+        }
+    }
+    
+    private func sortPortfolioCoinsIfNeeded(coins: [CoinModel]) -> [CoinModel] {
+        // will only sort by holdings or reversedHoldings if needed
+        switch sortOption {
+        case .holdings:
+            return coins.sorted(by: { $0.currentHoldingsValue > $1.currentHoldingsValue })
+        case .holdingsReversed:
+            return coins.sorted(by: { $0.currentHoldingsValue < $1.currentHoldingsValue })
+        default:
+            return coins
         }
     }
     
