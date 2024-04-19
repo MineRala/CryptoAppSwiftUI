@@ -16,6 +16,7 @@ final class HomeViewModel: ObservableObject  {
     
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
+    private let portfolioDataService = PortfolioDataService()
     private var cancallables = Set<AnyCancellable>()
     
     
@@ -40,6 +41,21 @@ final class HomeViewModel: ObservableObject  {
             }
             .store(in: &cancallables)
         
+        $allCoins
+            .combineLatest(portfolioDataService.$savedEntities)
+            .map { (coinModels, portfolioEntites) -> [CoinModel] in
+                coinModels
+                    .compactMap { coin -> CoinModel? in
+                        guard let entity = portfolioEntites.first(where: { $0.coinID == coin.id }) else { return nil }
+                        return coin.updateHoldings(amount: entity.amount)
+                    }
+            }
+            .sink { [weak self] coins in
+                guard let self else { return }
+                self.portfolioCoins = coins
+            }
+            .store(in: &cancallables)
+        
         $searchText
         /// 2 publisher'ı birleştirmek için combine latest kullanılır. Son yayınlanan değeri alır.
             .combineLatest(coinDataService.$allCoins)
@@ -51,6 +67,10 @@ final class HomeViewModel: ObservableObject  {
                 self.allCoins = coins
             }
             .store(in: &cancallables)
+    }
+    
+    func updatePortfolio(coin: CoinModel, amount: Double) {
+        portfolioDataService.updatePortfolio(coin: coin, amount: amount)
     }
     
     private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
