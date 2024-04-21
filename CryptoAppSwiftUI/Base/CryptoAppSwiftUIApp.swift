@@ -15,6 +15,7 @@ struct CryptoAppSwiftUIApp: App {
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor(Color.theme.accent)]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor(Color.theme.accent)]
+        UITableView.appearance().backgroundColor = UIColor.clear
     }
     
     var body: some Scene {
@@ -24,6 +25,7 @@ struct CryptoAppSwiftUIApp: App {
                     HomeView()
                         .navigationBarBackButtonHidden(true)
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
                 .environmentObject(vm)
        ///          View Model'i environment object yapamamızın sebebi HomeView ve homeView'in tüm child viewleri homeViewModel'e erişebilsin diye.
                 ZStack {

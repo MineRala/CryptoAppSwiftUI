@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E81C572D2BC6C5BE0050BD2C /* CryptoAppSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C572C2BC6C5BE0050BD2C /* CryptoAppSwiftUIApp.swift */; };
-		E81C572F2BC6C5BE0050BD2C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C572E2BC6C5BE0050BD2C /* ContentView.swift */; };
 		E81C57312BC6C5C00050BD2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E81C57302BC6C5C00050BD2C /* Assets.xcassets */; };
 		E81C57342BC6C5C00050BD2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E81C57332BC6C5C00050BD2C /* Preview Assets.xcassets */; };
 		E81C573E2BC6C92F0050BD2C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81C573D2BC6C92F0050BD2C /* Color.swift */; };
@@ -55,7 +54,6 @@
 /* Begin PBXFileReference section */
 		E81C57292BC6C5BE0050BD2C /* CryptoAppSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoAppSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E81C572C2BC6C5BE0050BD2C /* CryptoAppSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAppSwiftUIApp.swift; sourceTree = "<group>"; };
-		E81C572E2BC6C5BE0050BD2C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E81C57302BC6C5C00050BD2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E81C57332BC6C5C00050BD2C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E81C573D2BC6C92F0050BD2C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				E81C572C2BC6C5BE0050BD2C /* CryptoAppSwiftUIApp.swift */,
-				E81C572E2BC6C5BE0050BD2C /* ContentView.swift */,
 				E81C57302BC6C5C00050BD2C /* Assets.xcassets */,
 			);
 			path = Base;
@@ -449,7 +446,6 @@
 				E81C57522BC6F5C50050BD2C /* CoinRowView.swift in Sources */,
 				E81C575A2BC705DE0050BD2C /* HomeViewModel.swift in Sources */,
 				E82AC1CA2BD41B0D0050629C /* Date.swift in Sources */,
-				E81C572F2BC6C5BE0050BD2C /* ContentView.swift in Sources */,
 				E81C574A2BC6DFB30050BD2C /* CircleButtonView.swift in Sources */,
 				E81C57772BD163FA0050BD2C /* MarketDataModel.swift in Sources */,
 				E82AC1D32BD441C90050629C /* SettingsView.swift in Sources */,
@@ -619,7 +615,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -648,7 +643,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

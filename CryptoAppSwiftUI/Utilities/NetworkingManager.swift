@@ -25,11 +25,10 @@ final class NetworkingManager {
     
     static func download(url: URL) -> AnyPublisher<Data, Error> {
         return URLSession.shared.dataTaskPublisher(for: url)
-        // Aboneliği global bir arkaplan iş parçaçığına atar
-            .subscribe(on: DispatchQueue.global(qos: .default))
             .tryMap({ try handleURLResponse(output: $0, url: url) })
-        // Yayının sonuçlarını ana iş parçacığına alır
-            .receive(on: DispatchQueue.main)
+            ///(retry(3)) - bir hata oluştuğunda yayıncıyı yeniden denemek için kullanılır. Özellikle ağ çağrıları gibi dış kaynaklara bağlı işlemlerde kullanılabilir.
+            ///Bu durumda, retry(3) çağrısı, yayıncı herhangi bir hata döndürdüğünde, hatalı işlemi 3 kez daha denemek için kullanılır. Yani, toplamda 4 deneme yapılacaktır (ilk deneme dahil). Eğer hata 3 deneme sonunda düzeltilmezse, hata yayıncı tarafından iletilir ve abonelere bildirilir.
+            .retry(3)
             .eraseToAnyPublisher()
     }
     
