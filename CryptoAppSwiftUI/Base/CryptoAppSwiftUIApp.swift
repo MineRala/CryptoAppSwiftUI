@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct CryptoAppSwiftUIApp: App {
     @StateObject private var vm = HomeViewModel()
+    @State private var showLaunchView: Bool = true
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor(Color.theme.accent)]
@@ -18,12 +19,21 @@ struct CryptoAppSwiftUIApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                HomeView()
-                    .navigationBarBackButtonHidden(true)
+            ZStack {
+                NavigationView {
+                    HomeView()
+                        .navigationBarBackButtonHidden(true)
+                }
+                .environmentObject(vm)
+       ///          View Model'i environment object yapamamızın sebebi HomeView ve homeView'in tüm child viewleri homeViewModel'e erişebilsin diye.
+                ZStack {
+                    if showLaunchView {
+                        LaunchView(showLaunchView: $showLaunchView)
+                            .transition(.move(edge: .leading))
+                    }
+                }
+                .zIndex(2.0)
             }
-            .environmentObject(vm)
-   ///          View Model'i environment object yapamamızın sebebi HomeView ve homeView'in tüm child viewleri homeViewModel'e erişebilsin diye.
         }
     }
 }

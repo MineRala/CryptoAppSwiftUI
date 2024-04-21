@@ -31,10 +31,12 @@ struct HomeView: View {
                 SearchBarView(searchText: $vm.searchText)
                 columnTitles
                 if !showPortfolio {
+                    //TODO: Error yönetimi eklenek response'u çekemezse
                     allCoinsList
                         .transition(.move(edge: .leading))
                 }
                 if showPortfolio {
+                    //TODO: Error yönetimi eklenek response'u çekemezse
                     portfolioCoinsList
                         .transition(.move(edge: .trailing))
                 }

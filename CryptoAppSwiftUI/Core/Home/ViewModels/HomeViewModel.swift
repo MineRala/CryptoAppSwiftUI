@@ -15,6 +15,7 @@ final class HomeViewModel: ObservableObject  {
     @Published var searchText: String = ""
     @Published var isLoading: Bool = false
     @Published var sortOption: SortOption = .holdings
+    @Published var error: Error? = nil
     
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
