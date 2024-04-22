@@ -7,6 +7,10 @@
 
 import Foundation
 
-final class SettingsViewModel {
-    
+final class SettingsViewModel: ObservableObject {
+    let defaultURL = URL(string: "https://www.google.com")!
+    let youtubeURL = URL(string: "https://www.youtube.com/c/swiftfulthinking")!
+    let coffeeURL = URL(string: "https://www.buymeacoffee.com/nicksarno")!
+    let coingeckoURL = URL(string: "https://www.coingecko.com")!
+    let personalURL = URL(string: "https://github.com/MineRala")!
 }

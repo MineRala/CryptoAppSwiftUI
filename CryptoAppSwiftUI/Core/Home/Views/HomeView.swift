@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject private var vm: HomeViewModel
-//    @StateObject private var vm = HomeViewModel()
+    @StateObject private var vm = HomeViewModel()
     @State private var showPortfolio = false // animate right
     @State private var showPortfolioView = false // new sheet
     @State private var showSettingsView = false // new sheet
@@ -21,30 +20,34 @@ struct HomeView: View {
             Color.theme.background
                 .ignoresSafeArea()
                 .sheet(isPresented: $showPortfolioView, content: {
-                    PortfolioView()
-                        .environmentObject(vm)
-                    /// Child view olduğu için view model'i environment Object ile pasladık
+                    PortfolioView(vm: vm)
                 })
             VStack {
                 homeHeader
-                HomeStatsView(showPortfolio: $showPortfolio)
+                HomeStatsView(vm: vm, showPortfolio: $showPortfolio)
                 SearchBarView(searchText: $vm.searchText)
                 columnTitles
                 if !showPortfolio {
-                    //TODO: Error yönetimi eklenek response'u çekemezse
-                    allCoinsList
-                        .transition(.move(edge: .leading))
+                    if let error = vm.error {
+                        ErrorView(message: error)
+                    } else {
+                        allCoinsList
+                            .transition(.move(edge: .leading))
+                    }
                 }
                 if showPortfolio {
-                    //TODO: Error yönetimi eklenek response'u çekemezse
-                    ZStack(alignment: .top) {
-                        if vm.portfolioCoins.isEmpty && vm.searchText.isEmpty {
-                            portfolioEmptyText
-                        } else {
-                            portfolioCoinsList
+                    if let error = vm.error {
+                        ErrorView(message: error)
+                    } else {
+                        ZStack(alignment: .top) {
+                            if vm.portfolioCoins.isEmpty && vm.searchText.isEmpty {
+                                portfolioEmptyText
+                            } else {
+                                portfolioCoinsList
+                            }
                         }
+                        .transition(.move(edge: .trailing))
                     }
-                    .transition(.move(edge: .trailing))
                 }
                 
                 Spacer(minLength: 0)

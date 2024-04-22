@@ -23,6 +23,11 @@ final class DetailViewModel: ObservableObject {
         self.coinDetailService = CoinDetailDataService(coin: coin)
         addSubscribers()
     }
+
+    deinit {
+        // Abonelikleri kaldırma
+        cancellables.forEach { $0.cancel() }
+    }
     
     private func addSubscribers() {
         coinDetailService.$coinDetails

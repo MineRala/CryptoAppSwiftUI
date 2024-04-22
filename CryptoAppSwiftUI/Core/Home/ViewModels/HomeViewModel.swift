@@ -15,19 +15,20 @@ final class HomeViewModel: ObservableObject  {
     @Published var searchText: String = ""
     @Published var isLoading: Bool = false
     @Published var sortOption: SortOption = .holdings
-    @Published var error: Error? = nil
+    @Published var error: String?
     
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     private let portfolioDataService = PortfolioDataService()
-    private var cancallables = Set<AnyCancellable>()
-    
-    enum SortOption {
-        case rank, rankReversed, holdings, holdingsReversed, price, priceReversed
-    }
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         addSubscribers()
+    }
+
+    deinit {
+        // Abonelikleri kaldırma
+        cancellables.forEach { $0.cancel() }
     }
     
     private func addSubscribers() {
@@ -43,7 +44,7 @@ final class HomeViewModel: ObservableObject  {
                 guard let self else { return }
                 self.allCoins = coins
             }
-            .store(in: &cancallables)
+            .store(in: &cancellables)
         
         // updates portfolioCoins
         $allCoins
@@ -53,7 +54,7 @@ final class HomeViewModel: ObservableObject  {
                 guard let self else { return }
                 self.portfolioCoins = self.sortPortfolioCoinsIfNeeded(coins: coins)
             }
-            .store(in: &cancallables)
+            .store(in: &cancellables)
         
         // updates marketData
         marketDataService.$marketData
@@ -65,7 +66,15 @@ final class HomeViewModel: ObservableObject  {
                 self.statistics = stats
                 self.isLoading = false
             }
-            .store(in: &cancallables)
+            .store(in: &cancellables)
+        
+        // handle error
+        coinDataService.$error
+            .sink { [weak self] error in
+                guard let self else { return }
+                self.error = error
+            }
+            .store(in: &cancellables)
     }
     
     func updatePortfolio(coin: CoinModel, amount: Double) {
@@ -91,9 +100,12 @@ final class HomeViewModel: ObservableObject  {
         }
         let lowercasedText = text.lowercased()
         return coins.filter { coin in
-            return coin.name.lowercased().contains(lowercasedText) || coin.symbol.lowercased().contains(lowercasedText) || coin.id.lowercased().contains(lowercasedText)
+            return coin.name.lowercased().contains(lowercasedText) || 
+            coin.symbol.lowercased().contains(lowercasedText) ||
+            coin.id.lowercased().contains(lowercasedText)
         }
     }
+
     /// coins parametresi inout olarak belirtilmiştir, bu da işlevin bu dizi üzerinde değişiklik yapabileceği anlamına gelir. Bu nedenle, işlev çağrıldığında coins parametresi üzerinde yapılan değişiklikler işlevin çağrıldığı yerde etkili olacaktır. Bu tür parametreler genellikle işlevin dışarıya değer döndürmesi yerine, doğrudan dizi üzerinde değişiklik yapması gerektiğinde kullanılır.
     /// Coins dizesi üstünde değişiklik yapıldı. Returnlemeye gerek yok
     private func sortCoins(sort: SortOption, coins: inout [CoinModel]) {
@@ -144,7 +156,7 @@ final class HomeViewModel: ObservableObject  {
         }.reduce(0, +)
         let percentageChange = ((portfolioValue - previousValue) / previousValue)
         let portfolio = StatisticModel(title: "Portfolio Value", value: portfolioValue.asCurrencyWith2Decimals(), percentageChanged: percentageChange)
-      
+        
         stats.append(contentsOf: [
             marketCap,
             volume,

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PortfolioView: View {
-    @EnvironmentObject private var vm: HomeViewModel
+    @ObservedObject var vm: HomeViewModel
     @State private var selectedCoin: CoinModel? = nil
     @State private var quantitiyText: String = ""
     @State private var showCheckmark: Bool = false
@@ -48,8 +48,7 @@ struct PortfolioView: View {
 
 struct PortfolioView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioView()
-            .environmentObject(dev.homeVM)
+        PortfolioView(vm: dev.homeVM)
     }
 }
 

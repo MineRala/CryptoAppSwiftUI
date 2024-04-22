@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct CryptoAppSwiftUIApp: App {
-    @StateObject private var vm = HomeViewModel()
     @State private var showLaunchView: Bool = true
     
     init() {
@@ -26,7 +25,6 @@ struct CryptoAppSwiftUIApp: App {
                         .navigationBarBackButtonHidden(true)
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
-                .environmentObject(vm)
        ///          View Model'i environment object yapamamızın sebebi HomeView ve homeView'in tüm child viewleri homeViewModel'e erişebilsin diye.
                 ZStack {
                     if showLaunchView {

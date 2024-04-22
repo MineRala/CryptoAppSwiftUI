@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeStatsView: View {
-    @EnvironmentObject private var vm: HomeViewModel
+    @ObservedObject var vm: HomeViewModel
     @Binding var showPortfolio: Bool
 
     var body: some View {
@@ -24,7 +24,6 @@ struct HomeStatsView: View {
 
 struct HomeStatsView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeStatsView(showPortfolio: .constant(false))
-            .environmentObject(dev.homeVM)
+        HomeStatsView(vm: dev.homeVM, showPortfolio: .constant(false))
     }
 }

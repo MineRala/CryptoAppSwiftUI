@@ -10,6 +10,8 @@ import Combine
 
 final class CoinDataService {
     @Published var allCoins: [CoinModel] = []
+    @Published var error: String?
+
     var coinSubscription: AnyCancellable?
     
     init() {
@@ -18,15 +20,25 @@ final class CoinDataService {
     }
     
     func getCoins() {
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h") else { return }
-        
-        coinSubscription = NetworkingManager.download(url: url)
+        coinSubscription = NetworkingManager.download(urlString: URLs.coinDataURL.urlString)
             .decode(type: [CoinModel].self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: NetworkingManager.handleCompletion, receiveValue: { [weak self] coins in
+            .sink(receiveCompletion: { [weak self] completion in
                 guard let self else { return }
-                self.allCoins = coins
-                self.coinSubscription?.cancel()
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    if let networkingError = error as? NetworkingError {
+                        self.error = networkingError.errorMessage
+                    } else {
+                        self.error = NetworkingError.unknown.errorMessage
+                    }
+                }
+            }, receiveValue: { [weak self] coins in
+                guard let self else { return }
+                allCoins = coins
+                coinSubscription?.cancel()
             })
     }
 }

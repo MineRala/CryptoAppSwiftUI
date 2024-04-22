@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
-    let defaultURL = URL(string: "https://www.google.com")!
-    let youtubeURL = URL(string: "https://www.youtube.com/c/swiftfulthinking")!
-    let coffeeURL = URL(string: "https://www.buymeacoffee.com/nicksarno")!
-    let coingeckoURL = URL(string: "https://www.coingecko.com")!
-    let personalURL = URL(string: "https://github.com/MineRala")!
-    
-    
+    @StateObject private var vm = SettingsViewModel()
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -46,13 +41,11 @@ struct SettingsView: View {
     }
 }
 
-
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
     }
 }
-
 
 extension SettingsView {
     private var swiftfullThinkingSection: some View {
@@ -68,8 +61,8 @@ extension SettingsView {
                     .foregroundStyle(Color.theme.accent)
             }
             .padding(.vertical)
-            Link("Subscribe on YouTube", destination: youtubeURL)
-            Link("Support his coffee addiction", destination: coffeeURL)
+            Link("Subscribe on YouTube", destination: vm.youtubeURL)
+            Link("Support his coffee addiction", destination: vm.coffeeURL)
         }
     }
     
@@ -87,7 +80,7 @@ extension SettingsView {
                     .foregroundStyle(Color.theme.accent)
             }
             .padding(.vertical)
-            Link("Visit CoinGecko", destination: coingeckoURL)
+            Link("Visit CoinGecko", destination: vm.coingeckoURL)
         }
     }
     
@@ -104,16 +97,16 @@ extension SettingsView {
                     .foregroundStyle(Color.theme.accent)
             }
             .padding(.vertical)
-            Link("Visit Website", destination: personalURL)
+            Link("Visit Website", destination: vm.personalURL)
         }
     }
     
     private var applicationSection: some View {
         Section(header: Text("Application")) {
-            Link("Terms of Service", destination: defaultURL)
-            Link("Privacy Policy", destination: defaultURL)
-            Link("Company Website", destination: defaultURL)
-            Link("Learn More", destination: defaultURL)
+            Link("Terms of Service", destination: vm.defaultURL)
+            Link("Privacy Policy", destination: vm.defaultURL)
+            Link("Company Website", destination: vm.defaultURL)
+            Link("Learn More", destination: vm.defaultURL)
         }
     }
 }

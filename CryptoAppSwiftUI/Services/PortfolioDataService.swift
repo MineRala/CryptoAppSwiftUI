@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 
 final class PortfolioDataService {
+
     private let container: NSPersistentContainer
     @Published var savedEntities: [PortfolioEntity] = []
 
